@@ -10,7 +10,10 @@ return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
-    'bootstrap' => ['log'],
+    'bootstrap' => [
+        'log',
+        'common\bootstrap\SetUp'
+    ],
     'modules' => [],
     'components' => [
         'request' => [
@@ -18,13 +21,14 @@ return [
             'cookieValidationKey' => $params['cookieValidationKey'],
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => 'shop\entities\User\User',
             'enableAutoLogin' => true,
             'identityCookie' => [
                 'name' => '_identity',
                 'httpOnly' => true,
                 'domain' => $params['cookieDomain'],
             ],
+            'loginUrl' => ['auth/login'],
         ],
         'session' => [
             'name' => '_session',
@@ -45,15 +49,15 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        'backendUrlManager' => require __DIR__ . '/../../backend/config/urlManager.php',
-        'frontendUrlManager' => require __DIR__ . '/urlManager.php',
+        'backendUrlManager' => require __DIR__ . '/urlManager.php',
+        'frontendUrlManager' => require __DIR__ . '/../../frontend/config/urlManager.php',
         'urlManager' => function () {
-            return Yii::$app->get('frontendUrlManager');
+            return Yii::$app->get('backendUrlManager');
         },
     ],
     'as access' => [
         'class' => 'yii\filters\AccessControl',
-        'except'=>['site/login','site/error'],
+        'except' => ['auth/login', 'site/error'],
         'rules' => [
             [
                 'allow' => true,

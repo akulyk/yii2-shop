@@ -5,12 +5,12 @@ $config = [
         'authClientCollection' => [
             'class' => 'yii\authclient\Collection',
             'clients' => [
-                'vk' => [
+                'vkontakte' => [
                     'class' => 'yii\authclient\clients\VKontakte',
                     'clientId' => '',
                     'clientSecret' => '',
                 ],
-                'fb' => [
+                'facebook' => [
                     'class' => 'yii\authclient\clients\Facebook',
                     'clientId' => '',
                     'clientSecret' => '',
