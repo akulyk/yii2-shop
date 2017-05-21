@@ -1,6 +1,6 @@
 <?php
 return [
-    'cookieValidationKey' => '',
+    'cookieValidationKey' => 'bfgfngfngfdngfdngfngfhgfngfdn',
     'cookieDomain' => '.yii2shop.dev',
     'frontendHostInfo' => 'http://yii2shop.dev',
     'backendHostInfo' => 'http://backend.yii2shop.dev',
