@@ -2,15 +2,13 @@
 
 namespace shop\services\auth;
 
-
-
-
 use shop\entities\User\User;
 use shop\forms\auth\SignupForm;
 use shop\repositories\UserRepository;
 use yii\mail\MailerInterface;
 
-class SignupService{
+class SignupService
+{
     private $mailer;
     private $users;
 
@@ -19,7 +17,8 @@ class SignupService{
         $this->mailer = $mailer;
         $this->users = $users;
     }
-    public function signup(SignupForm $form):User
+
+    public function signup(SignupForm $form): void
     {
         $user = User::requestSignup(
             $form->username,
@@ -27,6 +26,7 @@ class SignupService{
             $form->password
         );
         $this->users->save($user);
+
         $sent = $this->mailer
             ->compose(
                 ['html' => 'auth/signup/confirm-html', 'text' => 'auth/signup/confirm-text'],
@@ -38,9 +38,7 @@ class SignupService{
         if (!$sent) {
             throw new \RuntimeException('Email sending error.');
         }
-
-
-    }/**/
+    }
 
     public function confirm($token): void
     {
@@ -50,6 +48,5 @@ class SignupService{
         $user = $this->users->getByEmailConfirmToken($token);
         $user->confirmSignup();
         $this->users->save($user);
-    }/**/
-
-}/* end of Service */
+    }
+}

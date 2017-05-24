@@ -10,7 +10,23 @@ return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'aliases' => [
+        '@staticRoot' => $params['staticPath'],
+        '@static'   => $params['staticHostInfo'],
+    ],
+    'layout' => 'blank',
     'controllerNamespace' => 'frontend\controllers',
+    'container' => [
+        'definitions' => [
+            'yii\widgets\Breadcrumbs' => [
+                'homeLink' => [
+                    'label' => '<i class="fa fa-home"></i>',
+                    'encode' => false,
+                    'url' => Yii::$app->homeUrl,
+                ],
+            ],
+        ],
+    ],
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',

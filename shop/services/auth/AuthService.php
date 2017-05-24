@@ -13,7 +13,7 @@ class AuthService
     public function __construct(UserRepository $users)
     {
         $this->users = $users;
-    }/**/
+    }
 
     public function auth(LoginForm $form): User
     {
@@ -22,6 +22,5 @@ class AuthService
             throw new \DomainException('Undefined user or password.');
         }
         return $user;
-    }/**/
-
-}/* end of Service */
+    }
+}

@@ -1,7 +1,10 @@
 <?php
+
 namespace shop\services\auth;
+
 use shop\entities\User\User;
 use shop\repositories\UserRepository;
+
 class NetworkService
 {
     private $users;
@@ -9,7 +12,7 @@ class NetworkService
     public function __construct(UserRepository $users)
     {
         $this->users = $users;
-    }/**/
+    }
 
     public function auth($network, $identity): User
     {
@@ -19,7 +22,7 @@ class NetworkService
         $user = User::signupByNetwork($network, $identity);
         $this->users->save($user);
         return $user;
-    }/**/
+    }
 
     public function attach($id, $network, $identity): void
     {
@@ -29,6 +32,5 @@ class NetworkService
         $user = $this->users->get($id);
         $user->attachNetwork($network, $identity);
         $this->users->save($user);
-    }/**/
-
-}/* end of Service */
+    }
+}

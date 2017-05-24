@@ -9,6 +9,8 @@ use shop\forms\auth\SignupForm;
 
 class SignupController extends Controller
 {
+    public $layout = 'cabinet';
+
     private $service;
 
     public function __construct($id, $module, SignupService $service, $config = [])
@@ -71,6 +73,5 @@ class SignupController extends Controller
             Yii::$app->session->setFlash('error', $e->getMessage());
         }
         return $this->goHome();
-    }/**/
-
-}/* end of Controller */
+    }
+}
